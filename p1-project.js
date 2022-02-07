@@ -8,23 +8,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
     function randomNum () {
-        return parseInt(Math.random() * (50000 - 1) + 1);
+        return parseInt(Math.random() * (50000 - 0) + 1);
     }
     
     function fetchData (num, i) {
         for (let x=0; x < 1; x++) {
-        fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${num}`)
+        fetch (`https://collectionapi.metmuseum.org/public/collection/v1/objects/${num}`)
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
             console.log(data.message);
             console.log(data.additionalImages.length);
             console.log(data.primaryImageSmall);
-            if (data.message == 'ObjectID not found' || data.primaryImageSmall == '' || data.primaryImageSmall == undefined || data.additionalImages.length == 0) {
-                x--;
+            if (data.message !== 'ObjectID not found' || data.primaryImageSmall !== null) {
+                rndrWork(data, i);
             }
             else {
-                rndrWork(data, i);
+                i--;
+                return i;
             }
         })    
     }}
@@ -33,18 +34,17 @@ document.addEventListener('DOMContentLoaded', function () {
         let img = document.createElement('img');
         let title = document.createElement('p');
         let artist = document.createElement('p');
+        let info = document.createElement('p');
         img.src = data.primaryImageSmall;
         title.innerText = data.title;
-        if (title.innerText === "") {
+        if (title.innerText === '') {
             title.innerText = 'Untitled';
         }
         artist.innerText = data.artistDisplayName;
-        if (artist.innerText === "") {
+        if (artist.innerText === '') {
             artist.innerText = 'Artist Unknown';
         }
-        // console.log(img.src);
-        // console.log(title.innerText);
-        // console.log(artist.innerText);
+        // info.innerText = data.
         document.getElementById(`content${i}`).appendChild(img);
         document.getElementById(`title${i}`).appendChild(title);
         document.getElementById(`artist${i}`).appendChild(artist);
