@@ -1,3 +1,20 @@
+Project Pitch
+
+-> I want to find a simple way to reinvest people in works of art.  I feel that it's getting lost in our society and want to see if there is someway to maybe tie the two together.  Perhaps eventually turn it into the Spotify/Pandora of visual pieces.
+
+-> Initially, I'd like to:
+  1. Communicate with the Metropolitan Museum of Art Collection API
+  2. Display four random pieces with artist and title information 
+  3. Allow user to vote on which they like most
+  4. Comment on works
+  5. Refresh to #2
+
+-> Metropolitan Museum of Art Collection API
+
+-> Challenges
+  1. Getting all pics to the same size without disrupting natural ratios
+  2. Skipping invalid objects or objects without images
+
 # Phase 1 Project Guidelines
 
 ## Learning Goals
