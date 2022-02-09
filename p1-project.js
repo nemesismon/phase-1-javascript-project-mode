@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function randomWorks () {
         for (let i=0; i < 4; i++) {
-        fetchData(i);
+        await fetchData(i);
         }
     }
     
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let img = document.createElement('img');
         let title = document.createElement('p');
         let artist = document.createElement('p');
-        // let info = document.createElement('p');
+        let comment = document.createElement('p');
         img.src = workObj.primaryImageSmall;
         title.innerText = workObj.title;
         if (title.innerText === '') {
@@ -40,11 +40,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (artist.innerText === '') {
             artist.innerText = 'Artist Unknown';
         }
-        // info.innerText = workObj
+        comment.innerText = 'Comments to come!'
         document.getElementById(`content${i}`).appendChild(img);
         document.getElementById(`title${i}`).appendChild(title);
         document.getElementById(`artist${i}`).appendChild(artist);
+        document.getElementById(`artist${i}`).appendChild(comment);
     };
+
+    // addEventListener('click', )
     
     randomWorks();
 
