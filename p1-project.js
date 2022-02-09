@@ -1,30 +1,37 @@
 document.addEventListener('DOMContentLoaded', function () {
-   
+   //Use indexes to preload random numbers, then use functions to check, find new, and overwrite back to the array
 
-    async function randomWorks () {
-        for (let i=0; i < 4; i++) {
-        await fetchData(i);
-        }
-    }
+   //Blog about non-E6 notation for loops or the fetch scheme for bad data
+   
+    const artIndexes = [];
+    artIndexes.length = 4;
+    console.log(artIndexes);
     
     function randomNum () {
-        return parseInt(Math.random() * (63450 - 0) + 1);
+            return parseInt(Math.random() * (63450 - 0) + 1);
     }
     
-    async function fetchData (i) {
-        for (let x=0; x < 1; x++) {
-        let num = randomNum();
-        let workObj = await fetch (`https://collectionapi.metmuseum.org/public/collection/v1/objects/${num}`)
+    function fetchData () {
+            for (let i=0; i < artIndexes.length; i++) {
+            getFetch(i);
+            }
+    }  
+
+    async function getFetch (i) {
+        let randNum = randomNum();
+        await fetch (`https://collectionapi.metmuseum.org/public/collection/v1/objects/${randNum}`)
         .then((res) => res.json())
-        .then((data) => data);
-        if (workObj.message === 'ObjectID not found' || workObj.primaryImageSmall === '') {
-            x--;
-            fetchData();
-        }
-        else {
-            rndrWork(workObj, i);
-        }   
-    }}
+        .then((workObj) => {
+            if (workObj.message === 'Not a valid object' || workObj === 'ObjectID not found' || workObj.primaryImageSmall === '' || workObj === undefined) {
+                getFetch(i);
+            }
+            else {
+                artIndexes[i] = randNum;
+                console.log(artIndexes[i]);
+                rndrWork(workObj, i);
+            }
+        })
+    }
     
     function rndrWork(workObj, i) {
         let img = document.createElement('img');
@@ -40,15 +47,17 @@ document.addEventListener('DOMContentLoaded', function () {
         if (artist.innerText === '') {
             artist.innerText = 'Artist Unknown';
         }
-        comment.innerText = 'Comments to come!'
+        comment.innerText = 'Comments to come!';
         document.getElementById(`content${i}`).appendChild(img);
         document.getElementById(`title${i}`).appendChild(title);
         document.getElementById(`artist${i}`).appendChild(artist);
         document.getElementById(`artist${i}`).appendChild(comment);
+        // console.log(i);
     };
 
     // addEventListener('click', )
     
-    randomWorks();
+    fetchData();
 
+    
 });
