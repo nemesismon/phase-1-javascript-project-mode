@@ -1,18 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
    
-    function randomWorks () {
+
+    async function randomWorks () {
         for (let i=0; i < 4; i++) {
-        let num = randomNum();
-        fetchData(num, i);
+        // let num = randomNum();
+        // console.log(num);
+        fetchData(i);
         }
     }
     
     function randomNum () {
-        return parseInt(Math.random() * (50000 - 0) + 1);
+        return parseInt(Math.random() * (63450 - 0) + 1);
     }
     
-    function fetchData (num, i) {
+    function fetchData (i) {
         for (let x=0; x < 1; x++) {
+        let num = randomNum();
+        console.log(num);
         fetch (`https://collectionapi.metmuseum.org/public/collection/v1/objects/${num}`)
         .then((res) => res.json())
         .then((data) => {
@@ -20,14 +24,14 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(data.message);
             console.log(data.additionalImages.length);
             console.log(data.primaryImageSmall);
-            if (data.message !== 'ObjectID not found' || data.primaryImageSmall !== null) {
-                rndrWork(data, i);
+            console.log(i);
+            if (data.message === 'ObjectID not found' || data.primaryImageSmall === '') {
+                x--;
             }
             else {
-                i--;
-                return i;
+                rndrWork(data, i);
             }
-        })    
+        })  
     }}
     
     function rndrWork(data, i) {
