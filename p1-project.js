@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
    //Blog about non-E6 notation for loops or the fetch scheme for bad data
    
     const artIndexes = [];
-    artIndexes.length = 4;
     console.log(artIndexes);
     
     function randomNum () {
@@ -12,21 +11,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
     function fetchData () {
-            for (let i=0; i < artIndexes.length; i++) {
+            for (let i=0; i < 4; i++) {
             getFetch(i);
             }
     }  
 
     async function getFetch (i) {
-        let randNum = randomNum();
-        await fetch (`https://collectionapi.metmuseum.org/public/collection/v1/objects/${randNum}`)
+        let num = randomNum();
+        await fetch (`https://collectionapi.metmuseum.org/public/collection/v1/objects/${num}`)
         .then((res) => res.json())
         .then((workObj) => {
-            if (workObj.message === 'Not a valid object' || workObj === 'ObjectID not found' || workObj.primaryImageSmall === '' || workObj === undefined) {
+            if (workObj.message === 'Not a valid object' || workObj === 'ObjectID not found' || workObj.primaryImageSmall === '' || workObj.title === undefined) {
                 getFetch(i);
             }
             else {
-                artIndexes[i] = randNum;
+                artIndexes[i] = num;
                 console.log(artIndexes[i]);
                 rndrWork(workObj, i);
             }
