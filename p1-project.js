@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
         let img = document.createElement('img');
         let title = document.createElement('p');
         let artist = document.createElement('p');
-        let comment = document.createElement('p');
         img.src = workObj.primaryImageSmall;
         title.innerText = workObj.title;
         if (title.innerText === '') {
@@ -46,17 +45,19 @@ document.addEventListener('DOMContentLoaded', function () {
         if (artist.innerText === '') {
             artist.innerText = 'Artist Unknown';
         }
-        comment.innerText = 'Comments to come!';
         document.getElementById(`content${i}`).appendChild(img);
         document.getElementById(`title${i}`).appendChild(title);
         document.getElementById(`artist${i}`).appendChild(artist);
-        document.getElementById(`artist${i}`).appendChild(comment);
-        // console.log(i);
+        let comment = document.getElementById(`post${i}`);
+        comment.addEventListener('click', function () {
+            let commentBox = document.getElementById(`comment-box${i}`).value;  
+            let li = document.createElement('li');
+            let text = document.createTextNode(commentBox);
+            li.appendChild(text);
+            document.getElementById(`unordered${i}`).appendChild(li);
+        })
     };
 
-    // addEventListener('click', )
-    
     fetchData();
-
     
 });
