@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
             li.appendChild(text);
             document.getElementById(`unordered${i}`).appendChild(li);
         })
+
+        //Event listener for image liked most here
     };
 
     fetchData();
