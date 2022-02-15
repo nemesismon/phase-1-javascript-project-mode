@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         img.addEventListener('click', () => {
             alert(`You liked ${title.innerText} by ${artist.innerText} the most!`);
             window.location.reload();
+            
         })
         // container.innerHTML += `
         // <div class='card'>
