@@ -2,18 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchData();
 
-    //Comments here;
-    //Pictures clickable;
-
 });
-   //Use indexes to preload random numbers, then use functions to check, find new, and overwrite back to the array;
-   //Blog about non-E6 notation for loops or the fetch scheme for bad data;
    
     const artLiked = [];
     
-    function randomNum() {
-            return parseInt(Math.random() * (63450 - 0) + 1);
-    }
+    function randomNum() {return parseInt(Math.random() * (63450 - 0) + 1)}
     
     function fetchData() {
             for (let i=0; i < 4; i++) {
@@ -30,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 getFetch();
             }
             else {
-                artLiked.push(num);
                 rndrWork(workObj);
             }
         })
@@ -55,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (artist.innerText === '') {
             artist.innerText = 'Artist Unknown';
         }
-        commentText.placeholder = 'Thoughts/comments on piece';
+        commentText.placeholder = 'Thoughts/comments';
         commentText.type = 'text';
         button.innerText = 'Submit';
         artPiece.appendChild(title);
@@ -71,25 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
             commentText.placeholder = 'Thoughts/comments on piece';
         });
         img.addEventListener('click', () => {
-            alert(`You liked ${title.innerText} by ${artist.innerText} the most!`);
+            alert(`You liked ${title.innerText} by ${artist.innerText} the most! Object #: ${workObj.objectID} at The Metropolitan Museum of Art.`);
+            artLiked.push(workObj.objectID);   
             window.location.reload();
-            
         })
-        // container.innerHTML += `
-        // <div class='card'>
-        //     <header>
-        //         <h4>${workObj.title}</h4>
-        //     </header>
-        //     <div>
-        //         <h4>${img.src = workObj.primaryImageSmall}</h4>
-        //     </div>
-        //     <footer>
-        //         <h4>${workObj.artist}</h4>
-        //     </footer>
-        //     <input type='text' id='comment-box' placeholder='Thoughts/comments on piece'>
-        //     <button id='post0'>Submit</button>
-        //     <ul id='unordered0'>
-        //     </ul>
-        //     </div>
-        // `
+ 
     };
